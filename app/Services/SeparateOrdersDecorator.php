@@ -6,7 +6,7 @@ use App\DTO\CreateOrderDto;
 use App\DTO\OrderFilteringDto;
 use App\Enums\OrderTypeEnum;
 use App\Exceptions\CartIsEmptyException;
-use App\Interfaces\CreateOrderServiceInterface;
+use App\Interfaces\CreateOrderInterface;
 use App\Interfaces\OrderServiceInterface;
 use App\Models\Order;
 use App\Models\Product;
@@ -14,7 +14,7 @@ use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
-class SeparateOrdersDecorator implements CreateOrderServiceInterface
+class SeparateOrdersDecorator implements CreateOrderInterface
 {
     private Collection $productsWithAuctions;
 
@@ -22,7 +22,7 @@ class SeparateOrdersDecorator implements CreateOrderServiceInterface
 
     private CreateOrderDto $dto;
 
-    public function __construct(private readonly CreateOrderServiceInterface $service)
+    public function __construct(private readonly CreateOrderInterface $service)
     {
         $this->productsWithoutAuctions = new Collection;
         $this->productsWithAuctions = new Collection;

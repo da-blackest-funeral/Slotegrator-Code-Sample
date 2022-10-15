@@ -5,7 +5,7 @@ namespace App\Services\Notifications;
 use App\DTO\CreateOrderDto;
 use App\DTO\OrderFilteringDto;
 use App\Enums\NotificationTypeEnum;
-use App\Interfaces\CreateOrderServiceInterface;
+use App\Interfaces\CreateOrderInterface;
 use App\Interfaces\OrderNotifier;
 use App\Interfaces\OrderServiceInterface;
 use App\Models\Order;
@@ -14,10 +14,10 @@ use App\Services\Notifications\Strategies\DatabaseNotificationStrategy;
 use App\Services\Notifications\Strategies\OrderCreatedMailStrategy;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class OrderServiceNotificationDecorator implements CreateOrderServiceInterface
+class OrderNotificationDecorator implements CreateOrderInterface
 {
     public function __construct(
-        private readonly CreateOrderServiceInterface $service,
+        private readonly CreateOrderInterface $service,
         private readonly OrderNotifier $notifier,
     ) {}
 

@@ -4,16 +4,16 @@ namespace App\Providers;
 
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\OrderItemController;
-use App\Interfaces\CreateOrderServiceInterface;
+use App\Interfaces\CreateOrderInterface;
 use App\Interfaces\OrderServiceInterface;
 use App\Interfaces\UpdateOrderInterface;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
-use App\Services\CreateOrderService;
+use App\Services\CreateOrder;
 use App\Services\Notifications\OrderNotificationService;
-use App\Services\Notifications\OrderServiceNotificationDecorator;
+use App\Services\Notifications\OrderNotificationDecorator;
 use App\Services\Notifications\UpdateOrderNotificationProxy;
 use App\Services\OrderService;
 use App\Services\SeparateOrdersDecorator;
@@ -33,11 +33,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(OrderServiceInterface::class, OrderService::class);
 
         $this->app->when([OrderController::class, OrderItemController::class])
-            ->needs(CreateOrderServiceInterface::class)
+            ->needs(CreateOrderInterface::class)
             ->give(function () {
                 return new SeparateOrdersDecorator(
-                    new OrderServiceNotificationDecorator(
-                        new CreateOrderService,
+                    new OrderNotificationDecorator(
+                        new CreateOrder,
                         new OrderNotificationService,
                     ),
                 );

@@ -12,7 +12,7 @@ use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\OrderFilterRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Resources\OrderResource;
-use App\Interfaces\CreateOrderServiceInterface;
+use App\Interfaces\CreateOrderInterface;
 use App\Interfaces\OrderServiceInterface;
 use App\Interfaces\UpdateOrderInterface;
 use App\Models\Order;
@@ -25,7 +25,7 @@ class OrderController extends Controller
 {
     public function __construct(
         private readonly OrderServiceInterface $service,
-        private readonly CreateOrderServiceInterface $createOrderService,
+        private readonly CreateOrderInterface $createOrderService,
         private readonly UpdateOrderInterface $updateOrderService,
     ) {}
 

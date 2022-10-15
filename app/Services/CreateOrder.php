@@ -5,13 +5,13 @@ namespace App\Services;
 use App\DTO\CreateOrderDto;
 use App\Enums\StatusEnum;
 use App\Exceptions\CartIsEmptyException;
-use App\Interfaces\CreateOrderServiceInterface;
+use App\Interfaces\CreateOrderInterface;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
-class CreateOrderService implements CreateOrderServiceInterface
+class CreateOrder implements CreateOrderInterface
 {
     private User $user;
 
